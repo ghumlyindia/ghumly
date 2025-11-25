@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { Mail, Phone, MapPin, Send, ShieldCheck, Users, Briefcase, ArrowRight, HelpCircle, ChevronDown, ChevronUp } from 'lucide-react';
 import PageHero from '../components/shared/PageHero';
 
@@ -112,7 +113,7 @@ export default function ContactPage() {
                         {/* Info & Support */}
                         <div className="space-y-8 flex flex-col justify-center">
                             <div>
-                                <h2 className="text-3xl font-bold text-[#0B3D60] mb-4">We're here for you</h2>
+                                <h2 className="text-3xl font-bold text-[#0B3D60] mb-4">We&apos;re here for you</h2>
                                 <p className="text-gray-600 text-lg leading-relaxed">
                                     Have a question about a tour? Need help with a booking? Our support team is ready to assist you on your journey.
                                 </p>
@@ -167,7 +168,7 @@ export default function ContactPage() {
                                     Grow Your Travel Business with <span className="text-[#F68A3A]">Ghumly</span>
                                 </h2>
                                 <p className="text-gray-600 text-lg leading-relaxed mb-8">
-                                    Join India's first verified travel marketplace. Get access to high-quality leads, build your brand trust, and manage bookings effortlessly.
+                                    Join India&apos;s first verified travel marketplace. Get access to high-quality leads, build your brand trust, and manage bookings effortlessly.
                                 </p>
 
                                 <div className="space-y-4 mb-8">
@@ -185,9 +186,9 @@ export default function ContactPage() {
                                 </div>
 
                                 <div className="flex flex-col sm:flex-row gap-4">
-                                    <a href="/agencies/register" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#F68A3A] text-white font-bold rounded-xl hover:bg-orange-600 transition-all shadow-lg hover:shadow-orange-500/30">
+                                    <Link href="/agencies/register" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#F68A3A] text-white font-bold rounded-xl hover:bg-orange-600 transition-all shadow-lg hover:shadow-orange-500/30">
                                         Register as Partner <ArrowRight size={20} />
-                                    </a>
+                                    </Link>
                                     <a href="mailto:partners@ghumly.com" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white border-2 border-gray-200 text-gray-700 font-bold rounded-xl hover:bg-gray-50 transition-all">
                                         Contact Sales
                                     </a>
@@ -201,7 +202,7 @@ export default function ContactPage() {
                                 <div className="w-16 h-16 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center mb-4">
                                     <Briefcase size={32} className="text-[#F68A3A]" />
                                 </div>
-                                <h3 className="text-2xl font-bold">"Ghumly has transformed how we get leads. The verification badge instantly builds trust with customers."</h3>
+                                <h3 className="text-2xl font-bold">&quot;Ghumly has transformed how we get leads. The verification badge instantly builds trust with customers.&quot;</h3>
                                 <div>
                                     <p className="font-bold text-lg">Rajesh Kumar</p>
                                     <p className="text-blue-200">Founder, Himalayan Treks</p>
@@ -214,6 +215,7 @@ export default function ContactPage() {
                         </div>
                     </div>
                 )}
+
 
             </div>
 

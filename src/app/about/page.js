@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { ShieldCheck, Search, Heart, Users, Globe, Award, ArrowRight, CheckCircle2, XCircle, MapPin, Star } from 'lucide-react';
 import PageHero from '../components/shared/PageHero';
 
@@ -55,10 +56,10 @@ export default function AboutPage() {
                             <div className="bg-red-50 rounded-3xl p-8 border border-red-100">
                                 <h3 className="text-2xl font-bold text-red-700 mb-4 flex items-center gap-3">
                                     <XCircle className="fill-red-100 text-red-600" size={32} />
-                                    The "Instagram Trap"
+                                    The &quot;Instagram Trap&quot;
                                 </h3>
                                 <p className="text-gray-700 mb-6 leading-relaxed">
-                                    You see a reel. You get excited. Then comes the chaos. Dozens of DMs, hidden costs, unverified agents, and the constant worry: <em>"Is this safe?"</em>
+                                    You see a reel. You get excited. Then comes the chaos. Dozens of DMs, hidden costs, unverified agents, and the constant worry: <em>&quot;Is this safe?&quot;</em>
                                 </p>
                                 <ul className="space-y-3">
                                     {[
@@ -160,12 +161,12 @@ export default function AboutPage() {
                 <div className="max-w-4xl mx-auto px-4 text-center space-y-8">
                     <Globe className="w-20 h-20 text-[#0B3D60] mx-auto opacity-10" />
                     <h2 className="text-4xl md:text-6xl font-bold text-[#0B3D60] tracking-tight">
-                        "Ghoomna hai? <br />
-                        Toh <span className="text-[#F68A3A]">Ghumly</span> hai!"
+                        &quot;Ghoomna hai? <br />
+                        Toh <span className="text-[#F68A3A]">Ghumly</span> hai!&quot;
                     </h2>
                     <p className="text-xl md:text-2xl text-gray-600 leading-relaxed font-light">
-                        The name <strong>Ghumly</strong> comes from the Hindi word <em>"Ghumna"</em> — to wander, to explore, to travel. <br /><br />
-                        Our mission is to make that exploration safe, simple, and accessible for every Indian traveler. Whether you're planning a <strong>weekend getaway to Udaipur</strong> or a <strong>Char Dham Yatra</strong>, Ghumly is your trusted companion.
+                        The name <strong>Ghumly</strong> comes from the Hindi word <em>&quot;Ghumna&quot;</em> — to wander, to explore, to travel. <br /><br />
+                        Our mission is to make that exploration safe, simple, and accessible for every Indian traveler. Whether you&apos;re planning a <strong>weekend getaway to Udaipur</strong> or a <strong>Char Dham Yatra</strong>, Ghumly is your trusted companion.
                     </p>
                 </div>
             </section>
@@ -184,18 +185,18 @@ export default function AboutPage() {
                         Join thousands of smart travelers who have switched to the safe, transparent way of booking trips.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-6 justify-center">
-                        <a
+                        <Link
                             href="/tours"
                             className="inline-flex items-center justify-center gap-3 px-10 py-5 bg-[#F68A3A] text-white text-lg font-bold rounded-full hover:bg-orange-600 transition-all shadow-lg hover:shadow-orange-500/30 transform hover:-translate-y-1"
                         >
                             Explore Verified Tours <ArrowRight size={20} />
-                        </a>
-                        <a
+                        </Link>
+                        <Link
                             href="/agencies/register"
                             className="inline-flex items-center justify-center gap-3 px-10 py-5 bg-white/10 backdrop-blur-sm border border-white/20 text-white text-lg font-bold rounded-full hover:bg-white/20 transition-all"
                         >
                             Become a Partner
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </section>
