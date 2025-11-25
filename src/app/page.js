@@ -12,6 +12,7 @@ import ProblemSolution from "./components/home/ProblemSolution";
 import HowGhumlyWorks from "./components/home/HowGhumlyWorks";
 import ReservationExplainer from "./components/home/ReservationExplainer";
 import SecondHero from "./components/home/SecondHero";
+import Link from "next/link";
 
 async function fetchMeta() {
   const [agencies, regions, categories] = await Promise.all([
@@ -86,7 +87,7 @@ export default async function Home() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-16">
             {popularRegions.map((r) => (
-              <a
+              <Link
                 key={r._id}
                 href={`/destinations/${r._id}`}
                 className="group relative h-[400px] rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500"
@@ -119,12 +120,12 @@ export default async function Home() {
                     </span>
                   </div>
                 </div>
-              </a>
+              </Link>
             ))}
           </div>
 
           <div className="text-center">
-            <a
+            <Link
               href="/destinations"
               className="inline-flex items-center gap-2 px-8 py-4 bg-gray-900 text-white font-bold rounded-full hover:bg-blue-600 transition-all shadow-lg hover:shadow-blue-500/30"
             >
@@ -132,7 +133,7 @@ export default async function Home() {
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -164,7 +165,7 @@ export default async function Home() {
             <FeaturedToursSlider tours={featured} />
 
             <div className="text-center mt-16">
-              <a
+              <Link
                 href="/tours?featured=true"
                 className="inline-flex items-center gap-2 px-8 py-4 border-2 border-gray-900 text-gray-900 font-bold rounded-full hover:bg-gray-900 hover:text-white transition-all"
               >
@@ -172,7 +173,7 @@ export default async function Home() {
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
-              </a>
+              </Link>
             </div>
           </div>
         </section>
@@ -202,7 +203,7 @@ export default async function Home() {
               const imageUrl = tour.mainImage?.url || tour.gallery?.[0]?.url;
               const price = tour.price?.amount?.toLocaleString('en-IN');
               return (
-                <a
+                <Link
                   key={tour._id}
                   href={`/tours/${tour._id}`}
                   className="group relative bg-white rounded-[2rem] overflow-hidden border border-gray-100 shadow-lg hover:shadow-2xl hover:shadow-orange-500/10 transition-all duration-500 hover:-translate-y-2"
@@ -253,7 +254,7 @@ export default async function Home() {
                       </span>
                     </div>
                   </div>
-                </a>
+                </Link>
               );
             })}
           </div>
@@ -269,13 +270,13 @@ export default async function Home() {
           )}
 
           <div className="text-center">
-            <a
+            <Link
               href="/tours/religious"
               className="inline-flex items-center gap-3 px-10 py-4 bg-[#0B3D60] text-white font-bold rounded-full hover:bg-[#F68A3A] transition-all transform hover:scale-105 shadow-xl hover:shadow-orange-500/20"
             >
               Explore All Religious Tours
               <ArrowRight size={20} />
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -301,7 +302,7 @@ export default async function Home() {
           <FeaturedAgenciesGrid agencies={featuredAgencies} />
 
           <div className="text-center mt-12">
-            <a
+            <Link
               href="/agencies?featured=true"
               className="inline-flex items-center gap-2 px-8 py-3 bg-[#0B3D60] text-white font-semibold rounded-full hover:bg-[#F68A3A] transition-all shadow-md"
             >
@@ -309,7 +310,7 @@ export default async function Home() {
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
-            </a>
+            </Link>
           </div>
         </section>
       )}

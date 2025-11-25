@@ -2,6 +2,7 @@ import { fetchJson } from "../../utils/api";
 import RegionCategoriesFilter from "../../components/destinations/RegionCategoriesFilter";
 import RegionExtraFilters from "../../components/destinations/RegionExtraFilters";
 import ToursGrid from "../../components/tours/ToursGrid";
+import Link from "next/link";
 
 async function fetchRegion(regionId) {
   const data = await fetchJson(`/destination-regions/${regionId}`);
@@ -85,9 +86,9 @@ export default async function RegionPage({ params, searchParams }) {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
             {/* Breadcrumbs */}
             <div className="flex items-center gap-2 text-white/80 text-sm mb-6 font-medium">
-              <a href="/" className="hover:text-white transition-colors">Home</a>
+              <Link href="/" className="hover:text-white transition-colors">Home</Link>
               <span>/</span>
-              <a href="/destinations" className="hover:text-white transition-colors">Destinations</a>
+              <Link href="/destinations" className="hover:text-white transition-colors">Destinations</Link>
               <span>/</span>
               <span className="text-white">{region?.name || 'Region'}</span>
             </div>
