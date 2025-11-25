@@ -1,11 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import { Calendar, MapPin, Search, Sparkles } from 'lucide-react';
 
-const Hero = ({ regions = [], categories = [], agencies = [] }) => {
+const HeroContent = ({ regions = [], categories = [], agencies = [] }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -179,6 +179,14 @@ const Hero = ({ regions = [], categories = [], agencies = [] }) => {
         </div>
       </section>
     </>
+  );
+};
+
+const Hero = (props) => {
+  return (
+    <Suspense fallback={<div className="min-h-[75vh] bg-gray-100 animate-pulse" />}>
+      <HeroContent {...props} />
+    </Suspense>
   );
 };
 
