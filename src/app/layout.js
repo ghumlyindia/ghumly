@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { Geist, Geist_Mono, Pacifico } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/layout/Navbar";
@@ -41,7 +42,9 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} ${pacifico.variable} antialiased`}
       >
         <AuthProvider>
-          <Navbar />
+          <Suspense fallback={<div className="h-20 bg-white shadow-lg" />}>
+            <Navbar />
+          </Suspense>
           <main className="min-h-screen">
             {children}
           </main>
@@ -49,5 +52,14 @@ export default function RootLayout({ children }) {
         </AuthProvider>
       </body>
     </html>
+  );
+}
+          <main className="min-h-screen">
+            {children}
+          </main>
+          <Footer />
+        </AuthProvider >
+      </body >
+    </html >
   );
 }
