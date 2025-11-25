@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { fetchJson } from '../utils/api';
 import Link from 'next/link';
@@ -103,7 +103,7 @@ const AgencyCard = ({ agency }) => {
   );
 };
 
-export default function AgenciesPage() {
+function AgenciesContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [agencies, setAgencies] = useState([]);
@@ -285,5 +285,13 @@ export default function AgenciesPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function AgenciesPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-gray-50 flex items-center justify-center"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div></div>}>
+      <AgenciesContent />
+    </Suspense>
   );
 }
