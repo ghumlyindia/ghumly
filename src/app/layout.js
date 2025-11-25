@@ -54,12 +54,4 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
-          <main className="min-h-screen">
-            {children}
-          </main>
-          <Footer />
-        </AuthProvider >
-      </body >
-    </html >
-  );
-}
+
