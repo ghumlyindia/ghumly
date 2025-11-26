@@ -49,7 +49,7 @@ export default async function AgencyDetailPage({ params, searchParams }) {
                   <img
                     src={agency.logo.url}
                     alt={agency.name}
-                    className="w-full h-full rounded-full object-cover"
+                    className="w-full h-full rounded-full object-contain"
                   />
                 ) : (
                   <div className="w-full h-full rounded-full bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center text-slate-400 font-bold text-5xl">

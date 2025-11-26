@@ -34,19 +34,19 @@ export default function HeroSlider({ slides = [] }) {
     {
       id: 1,
       desktopImage: '/images/hero/kerala-1.jpg',
-      mobileImage: '/images/hero/northern-lights-mobile.jpg',
+      mobileImage: '/images/hero/andaman_card.avif',
       alt: 'Northern Lights Package'
     },
     {
       id: 2,
       desktopImage: '/images/hero/rajasthan-1.jpg',
-      mobileImage: '/images/hero/bali-mobile.jpg',
+      mobileImage: '/images/hero/rajasthan_card.avif',
       alt: 'Bali Paradise'
     },
     {
       id: 3,
       desktopImage: '/images/hero/kerala-1.jpg',
-      mobileImage: '/images/hero/maldives-mobile.jpg',
+      mobileImage: '/images/hero/meghalya_card.avif',
       alt: 'Maldives Getaway'
     }
   ];

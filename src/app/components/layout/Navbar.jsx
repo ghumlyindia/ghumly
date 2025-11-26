@@ -59,10 +59,10 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0 flex items-center">
-            <Image 
-              src="/images/logo.png" 
-              alt="Ghumly Logo" 
-              width={180} 
+            <Image
+              src="/images/logo.png"
+              alt="Ghumly Logo"
+              width={180}
               height={60}
               className="h-14 w-auto object-contain"
               priority
@@ -102,14 +102,14 @@ const Navbar = () => {
             {/* Auth Section */}
             {!isLoggedIn ? (
               <div className="flex items-center space-x-3">
-                <Link 
-                  href="/login" 
+                <Link
+                  href="/login"
                   className="text-[#40A4DE] hover:text-[#3090C7] font-medium transition-colors duration-300 px-4 py-2"
                 >
                   Login
                 </Link>
-                <Link 
-                  href="/register" 
+                <Link
+                  href="/register"
                   className="bg-[#40A4DE] hover:bg-[#3090C7] text-white px-6 py-2 rounded-full font-medium transition-all duration-300 transform hover:scale-105 shadow-md"
                 >
                   Sign Up
@@ -117,7 +117,7 @@ const Navbar = () => {
               </div>
             ) : (
               <div className="flex items-center space-x-3">
-                <button 
+                <button
                   className="text-gray-600 hover:text-[#40A4DE] transition-colors duration-300 p-2"
                   aria-label="Favorites"
                 >
@@ -132,36 +132,36 @@ const Navbar = () => {
                     <User size={18} />
                     <span className="text-sm font-medium">Profile</span>
                   </button>
-                  
+
                   {/* User Dropdown */}
                   {showUserMenu && (
                     <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50">
-                      <Link 
-                        href="/account" 
+                      <Link
+                        href="/account"
                         className="flex items-center px-4 py-2 text-gray-700 hover:bg-[#40A4DE]/10 hover:text-[#40A4DE] transition-colors duration-200"
                         onClick={() => setShowUserMenu(false)}
                       >
                         <User size={16} className="mr-3" />
                         My Profile
                       </Link>
-                      <Link 
-                        href="/trips" 
+                      <Link
+                        href="/trips"
                         className="flex items-center px-4 py-2 text-gray-700 hover:bg-[#40A4DE]/10 hover:text-[#40A4DE] transition-colors duration-200"
                         onClick={() => setShowUserMenu(false)}
                       >
                         <MapPin size={16} className="mr-3" />
                         My Trips
                       </Link>
-                      <Link 
-                        href="/favorites" 
+                      <Link
+                        href="/favorites"
                         className="flex items-center px-4 py-2 text-gray-700 hover:bg-[#40A4DE]/10 hover:text-[#40A4DE] transition-colors duration-200"
                         onClick={() => setShowUserMenu(false)}
                       >
                         <Heart size={16} className="mr-3" />
                         Favorites
                       </Link>
-                      <Link 
-                        href="/settings" 
+                      <Link
+                        href="/settings"
                         className="flex items-center px-4 py-2 text-gray-700 hover:bg-[#40A4DE]/10 hover:text-[#40A4DE] transition-colors duration-200"
                         onClick={() => setShowUserMenu(false)}
                       >
@@ -197,155 +197,154 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Navigation Menu - Side Drawer */}
-      {isOpen && (
-        <div className="lg:hidden fixed inset-0 z-50">
-          {/* Backdrop */}
-          <div 
-            className="absolute inset-0 bg-black bg-opacity-50 transition-opacity"
-            onClick={closeMenu}
-            aria-hidden="true"
-          />
-          
-          {/* Side Menu */}
-          <div className={`absolute left-0 top-0 h-full w-80 bg-white shadow-2xl transform transition-transform duration-300 ease-in-out ${
-            isOpen ? 'translate-x-0' : '-translate-x-full'
+      <div className={`lg:hidden fixed inset-0 z-50 transition-all duration-300 ${isOpen ? 'visible' : 'invisible delay-300'
+        }`}>
+        {/* Backdrop */}
+        <div
+          className={`absolute inset-0 bg-black bg-opacity-50 transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0'
+            }`}
+          onClick={closeMenu}
+          aria-hidden="true"
+        />
+
+        {/* Side Menu */}
+        <div className={`absolute left-0 top-0 h-full w-80 bg-white shadow-2xl transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : '-translate-x-full'
           }`}>
-            <div className="flex flex-col h-full">
-              {/* Header with Logo */}
-              <div className="p-6 border-b border-gray-200">
-                <Link href="/" onClick={closeMenu}>
-                  <Image 
-                    src="/images/logo.png" 
-                    alt="Ghumly Logo" 
-                    width={140} 
-                    height={48}
-                    className="h-12 w-auto object-contain"
-                  />
-                </Link>
-                {!isLoggedIn ? (
-                  <div className="mt-4 flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center">
-                      <User size={24} className="text-gray-500" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-medium text-gray-900">Guest</h3>
-                      <Link
-                        href="/login"
-                        onClick={closeMenu}
-                        className="text-sm text-[#40A4DE] hover:text-[#3090C7] border border-gray-300 px-3 py-1 rounded mt-1 transition-colors duration-300 inline-block"
-                      >
-                        Login/Sign up
-                      </Link>
-                    </div>
+          <div className="flex flex-col h-full">
+            {/* Header with Logo */}
+            <div className="p-6 border-b border-gray-200">
+              <Link href="/" onClick={closeMenu}>
+                <Image
+                  src="/images/logo.png"
+                  alt="Ghumly Logo"
+                  width={140}
+                  height={48}
+                  className="h-12 w-auto object-contain"
+                />
+              </Link>
+              {!isLoggedIn ? (
+                <div className="mt-4 flex items-center space-x-4">
+                  <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center">
+                    <User size={24} className="text-gray-500" />
                   </div>
-                ) : (
-                  <div className="mt-4 flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-[#40A4DE] rounded-full flex items-center justify-center">
-                      <User size={24} className="text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-medium text-gray-900">Welcome</h3>
-                      <p className="text-sm text-gray-600">Travel Enthusiast</p>
-                    </div>
+                  <div>
+                    <h3 className="text-lg font-medium text-gray-900">Guest</h3>
+                    <Link
+                      href="/login"
+                      onClick={closeMenu}
+                      className="text-sm text-[#40A4DE] hover:text-[#3090C7] border border-gray-300 px-3 py-1 rounded mt-1 transition-colors duration-300 inline-block"
+                    >
+                      Login/Sign up
+                    </Link>
                   </div>
-                )}
+                </div>
+              ) : (
+                <div className="mt-4 flex items-center space-x-4">
+                  <div className="w-12 h-12 bg-[#40A4DE] rounded-full flex items-center justify-center">
+                    <User size={24} className="text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-medium text-gray-900">{user?.name || 'Welcome'}</h3>
+                    <p className="text-sm text-gray-600">{user?.email || 'Travel Enthusiast'}</p>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Menu Items */}
+            <div className="flex-1 overflow-y-auto py-4">
+              <div className="space-y-1">
+                {navItems.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className="flex items-center justify-between px-6 py-4 text-gray-700 hover:bg-[#40A4DE]/10 hover:text-[#40A4DE] transition-all duration-300"
+                    onClick={closeMenu}
+                  >
+                    <span className="text-base font-medium">{item.name}</span>
+                    <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </Link>
+                ))}
               </div>
 
-              {/* Menu Items */}
-              <div className="flex-1 overflow-y-auto py-4">
-                <div className="space-y-1">
-                  {navItems.map((item) => (
+              {/* Additional Menu Items (only when logged in) */}
+              {isLoggedIn && (
+                <div className="mt-6 border-t border-gray-200 pt-4">
+                  <div className="space-y-1">
                     <Link
-                      key={item.name}
-                      href={item.href}
+                      href="/account"
                       className="flex items-center justify-between px-6 py-4 text-gray-700 hover:bg-[#40A4DE]/10 hover:text-[#40A4DE] transition-all duration-300"
                       onClick={closeMenu}
                     >
-                      <span className="text-base font-medium">{item.name}</span>
+                      <div className="flex items-center">
+                        <User size={18} className="mr-3" />
+                        <span className="text-base font-medium">My Profile</span>
+                      </div>
                       <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
                     </Link>
-                  ))}
-                </div>
-
-                {/* Additional Menu Items (only when logged in) */}
-                {isLoggedIn && (
-                  <div className="mt-6 border-t border-gray-200 pt-4">
-                    <div className="space-y-1">
-                      <Link 
-                        href="/account" 
-                        className="flex items-center justify-between px-6 py-4 text-gray-700 hover:bg-[#40A4DE]/10 hover:text-[#40A4DE] transition-all duration-300" 
-                        onClick={closeMenu}
-                      >
-                        <div className="flex items-center">
-                          <User size={18} className="mr-3" />
-                          <span className="text-base font-medium">My Profile</span>
-                        </div>
-                        <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                      </Link>
-                      <Link 
-                        href="/trips" 
-                        className="flex items-center justify-between px-6 py-4 text-gray-700 hover:bg-[#40A4DE]/10 hover:text-[#40A4DE] transition-all duration-300"
-                        onClick={closeMenu}
-                      >
-                        <div className="flex items-center">
-                          <MapPin size={18} className="mr-3" />
-                          <span className="text-base font-medium">My Trips</span>
-                        </div>
-                        <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                      </Link>
-                      <Link 
-                        href="/favorites" 
-                        className="flex items-center justify-between px-6 py-4 text-gray-700 hover:bg-[#40A4DE]/10 hover:text-[#40A4DE] transition-all duration-300"
-                        onClick={closeMenu}
-                      >
-                        <div className="flex items-center">
-                          <Heart size={18} className="mr-3" />
-                          <span className="text-base font-medium">Favorites</span>
-                        </div>
-                        <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                      </Link>
-                      <Link 
-                        href="/settings" 
-                        className="flex items-center justify-between px-6 py-4 text-gray-700 hover:bg-[#40A4DE]/10 hover:text-[#40A4DE] transition-all duration-300"
-                        onClick={closeMenu}
-                      >
-                        <div className="flex items-center">
-                          <Settings size={18} className="mr-3" />
-                          <span className="text-base font-medium">Settings</span>
-                        </div>
-                        <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                      </Link>
-                    </div>
+                    <Link
+                      href="/trips"
+                      className="flex items-center justify-between px-6 py-4 text-gray-700 hover:bg-[#40A4DE]/10 hover:text-[#40A4DE] transition-all duration-300"
+                      onClick={closeMenu}
+                    >
+                      <div className="flex items-center">
+                        <MapPin size={18} className="mr-3" />
+                        <span className="text-base font-medium">My Trips</span>
+                      </div>
+                      <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </Link>
+                    <Link
+                      href="/favorites"
+                      className="flex items-center justify-between px-6 py-4 text-gray-700 hover:bg-[#40A4DE]/10 hover:text-[#40A4DE] transition-all duration-300"
+                      onClick={closeMenu}
+                    >
+                      <div className="flex items-center">
+                        <Heart size={18} className="mr-3" />
+                        <span className="text-base font-medium">Favorites</span>
+                      </div>
+                      <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </Link>
+                    <Link
+                      href="/settings"
+                      className="flex items-center justify-between px-6 py-4 text-gray-700 hover:bg-[#40A4DE]/10 hover:text-[#40A4DE] transition-all duration-300"
+                      onClick={closeMenu}
+                    >
+                      <div className="flex items-center">
+                        <Settings size={18} className="mr-3" />
+                        <span className="text-base font-medium">Settings</span>
+                      </div>
+                      <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </Link>
                   </div>
-                )}
-              </div>
-
-              {/* Footer (Logout button when logged in) */}
-              {isLoggedIn && (
-                <div className="border-t border-gray-200 p-4">
-                  <button
-                    onClick={handleLogout}
-                    className="flex items-center w-full px-2 py-3 text-red-600 hover:bg-red-50 rounded-lg transition-all duration-300"
-                  >
-                    <LogOut size={18} className="mr-3" />
-                    <span className="text-base font-medium">Sign Out</span>
-                  </button>
                 </div>
               )}
             </div>
+
+            {/* Footer (Logout button when logged in) */}
+            {isLoggedIn && (
+              <div className="border-t border-gray-200 p-4">
+                <button
+                  onClick={handleLogout}
+                  className="flex items-center w-full px-2 py-3 text-red-600 hover:bg-red-50 rounded-lg transition-all duration-300"
+                >
+                  <LogOut size={18} className="mr-3" />
+                  <span className="text-base font-medium">Sign Out</span>
+                </button>
+              </div>
+            )}
           </div>
         </div>
-      )}
+      </div>
     </nav>
   );
 };

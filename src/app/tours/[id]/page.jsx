@@ -290,8 +290,8 @@ export default function TourDetailsPage() {
                       <div
                         key={index}
                         className={`rounded-2xl border transition-all duration-300 overflow-hidden ${isActive
-                            ? 'border-blue-200 bg-blue-50/50 shadow-md'
-                            : 'border-gray-100 hover:border-blue-100 hover:bg-gray-50'
+                          ? 'border-blue-200 bg-blue-50/50 shadow-md'
+                          : 'border-gray-100 hover:border-blue-100 hover:bg-gray-50'
                           }`}
                       >
                         <button
@@ -322,10 +322,22 @@ export default function TourDetailsPage() {
 
                               {/* Day Details */}
                               <div className="flex flex-wrap gap-3 pt-2">
-                                {day.meals && (day.meals.breakfast || day.meals.lunch || day.meals.dinner) && (
+                                {day.meals?.breakfast && (
                                   <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white border border-gray-200 text-xs font-medium text-gray-600">
                                     <span className="w-2 h-2 rounded-full bg-orange-400" />
-                                    Meals Included
+                                    Breakfast
+                                  </div>
+                                )}
+                                {day.meals?.lunch && (
+                                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white border border-gray-200 text-xs font-medium text-gray-600">
+                                    <span className="w-2 h-2 rounded-full bg-orange-400" />
+                                    Lunch
+                                  </div>
+                                )}
+                                {day.meals?.dinner && (
+                                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white border border-gray-200 text-xs font-medium text-gray-600">
+                                    <span className="w-2 h-2 rounded-full bg-orange-400" />
+                                    Dinner
                                   </div>
                                 )}
                                 {day.accommodation && (
@@ -406,6 +418,31 @@ export default function TourDetailsPage() {
                   </ul>
                 </div>
               </div>
+
+              {/* Policies */}
+              {(tour.cancellationPolicy || tour.refundPolicy) && (
+                <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-8">
+                  <h3 className="text-2xl font-bold text-gray-900 font-serif mb-6">Policies</h3>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    {tour.cancellationPolicy && (
+                      <div className="bg-red-50 rounded-2xl p-6 border border-red-100">
+                        <h4 className="font-bold text-gray-900 mb-3 flex items-center gap-2">
+                          <Info size={20} className="text-red-500" /> Cancellation Policy
+                        </h4>
+                        <p className="text-gray-700 leading-relaxed text-sm">{tour.cancellationPolicy}</p>
+                      </div>
+                    )}
+                    {tour.refundPolicy && (
+                      <div className="bg-blue-50 rounded-2xl p-6 border border-blue-100">
+                        <h4 className="font-bold text-gray-900 mb-3 flex items-center gap-2">
+                          <RefreshCw size={20} className="text-blue-500" /> Refund Policy
+                        </h4>
+                        <p className="text-gray-700 leading-relaxed text-sm">{tour.refundPolicy}</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
 
               {/* Gallery */}
               {Array.isArray(tour.galleryImages) && tour.galleryImages.length > 0 && (

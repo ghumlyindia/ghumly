@@ -20,7 +20,7 @@ const AgencyCard = ({ agency }) => {
                   <img
                     src={agency.logo.url}
                     alt={agency.name}
-                    className="w-16 h-16 rounded-xl object-cover ring-1 ring-gray-100 shadow-sm group-hover:scale-105 transition-transform duration-300"
+                    className="w-16 h-16 rounded-xl object-contain ring-1 ring-gray-100 shadow-sm group-hover:scale-105 transition-transform duration-300"
                   />
                   {agency.isVerified && (
                     <div className="absolute -bottom-1.5 -right-1.5 bg-white rounded-full p-0.5 shadow-sm ring-1 ring-gray-100">

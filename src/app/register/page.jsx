@@ -2,13 +2,17 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { fetchJson } from '../utils/api';
-import { Mail, User, Lock, Phone, ArrowRight } from 'lucide-react';
+import { Mail, User, Lock, Phone, ArrowRight, Eye, EyeOff } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
 
 export default function RegisterPage() {
   const router = useRouter();
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -42,7 +46,11 @@ export default function RegisterPage() {
       });
       setStep(2);
     } catch (err) {
-      setError(err?.message || 'Failed to send OTP. Please try again.');
+      if (err.message.toLowerCase().includes('already exists')) {
+        setError('User with this email already exists. Please login.');
+      } else {
+        setError(err?.message || 'Failed to send verification code. Please try again.');
+      }
     } finally {
       setLoading(false);
     }
@@ -85,31 +93,45 @@ export default function RegisterPage() {
         router.push('/account');
       }
     } catch (err) {
-      setError(err?.message || 'Invalid OTP. Please try again.');
+      if (err.message.toLowerCase().includes('invalid otp')) {
+        setError('Incorrect verification code. Please try again.');
+      } else {
+        setError(err?.message || 'Registration failed. Please try again.');
+      }
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-teal-50 to-orange-50 px-4 py-12">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-white px-4 py-12">
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
-          <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900">
-            Join <span className="text-teal-600">Ghumly</span>
+          <Link href="/" className="inline-block mb-6">
+            <Image
+              src="/images/logo.png"
+              alt="Ghumly Logo"
+              width={180}
+              height={60}
+              className="h-16 w-auto object-contain mx-auto"
+              priority
+            />
+          </Link>
+          <h1 className="text-3xl font-bold text-gray-900">
+            Join Ghumly
           </h1>
-          <p className="mt-4 text-gray-600">Create your account to start booking amazing tours</p>
+          <p className="mt-2 text-gray-600">Create your account to start booking amazing tours</p>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-xl p-8">
+        <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
           {/* Progress Steps */}
           <div className="flex items-center justify-center mb-8">
             <div className="flex items-center">
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold ${step >= 1 ? 'bg-teal-600 text-white' : 'bg-gray-200 text-gray-600'}`}>
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold transition-colors duration-300 ${step >= 1 ? 'bg-[#40A4DE] text-white' : 'bg-gray-200 text-gray-600'}`}>
                 1
               </div>
-              <div className={`w-24 h-1 mx-2 ${step >= 2 ? 'bg-teal-600' : 'bg-gray-200'}`}></div>
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold ${step >= 2 ? 'bg-teal-600 text-white' : 'bg-gray-200 text-gray-600'}`}>
+              <div className={`w-24 h-1 mx-2 transition-colors duration-300 ${step >= 2 ? 'bg-[#40A4DE]' : 'bg-gray-200'}`}></div>
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold transition-colors duration-300 ${step >= 2 ? 'bg-[#40A4DE] text-white' : 'bg-gray-200 text-gray-600'}`}>
                 2
               </div>
             </div>
@@ -135,7 +157,7 @@ export default function RegisterPage() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-600 focus:border-transparent"
+                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#40A4DE] focus:border-transparent transition-all outline-none"
                     placeholder="John Doe"
                   />
                 </div>
@@ -153,7 +175,7 @@ export default function RegisterPage() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-600 focus:border-transparent"
+                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#40A4DE] focus:border-transparent transition-all outline-none"
                     placeholder="john@example.com"
                   />
                 </div>
@@ -162,7 +184,7 @@ export default function RegisterPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-teal-600 text-white py-3 rounded-lg hover:bg-teal-700 disabled:opacity-50 flex items-center justify-center font-medium transition-colors"
+                className="w-full bg-[#40A4DE] text-white py-3 rounded-lg hover:bg-[#3090C7] disabled:opacity-50 flex items-center justify-center font-medium transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
               >
                 {loading ? 'Sending OTP...' : (
                   <>
@@ -174,7 +196,7 @@ export default function RegisterPage() {
 
               <p className="text-center text-sm text-gray-600">
                 Already have an account?{' '}
-                <a href="/login" className="text-teal-600 font-medium hover:text-teal-700">
+                <a href="/login" className="text-[#40A4DE] font-medium hover:text-[#3090C7] transition-colors">
                   Login
                 </a>
               </p>
@@ -192,7 +214,7 @@ export default function RegisterPage() {
                   onChange={handleChange}
                   required
                   maxLength="6"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-600 focus:border-transparent text-center text-2xl tracking-widest font-mono"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#40A4DE] focus:border-transparent text-center text-2xl tracking-widest font-mono transition-all outline-none"
                   placeholder="000000"
                 />
                 <p className="mt-2 text-sm text-gray-600 text-center">
@@ -213,7 +235,7 @@ export default function RegisterPage() {
                     onChange={handleChange}
                     required
                     pattern="[6-9][0-9]{9}"
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-600 focus:border-transparent"
+                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#40A4DE] focus:border-transparent transition-all outline-none"
                     placeholder="10-digit Indian number"
                   />
                 </div>
@@ -226,15 +248,22 @@ export default function RegisterPage() {
                 <div className="relative">
                   <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
                   <input
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     name="password"
                     value={formData.password}
                     onChange={handleChange}
                     required
                     minLength="6"
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-600 focus:border-transparent"
+                    className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#40A4DE] focus:border-transparent transition-all outline-none"
                     placeholder="Minimum 6 characters"
                   />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  >
+                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                  </button>
                 </div>
               </div>
 
@@ -245,22 +274,29 @@ export default function RegisterPage() {
                 <div className="relative">
                   <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
                   <input
-                    type="password"
+                    type={showConfirmPassword ? "text" : "password"}
                     name="confirmPassword"
                     value={formData.confirmPassword}
                     onChange={handleChange}
                     required
                     minLength="6"
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-600 focus:border-transparent"
+                    className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#40A4DE] focus:border-transparent transition-all outline-none"
                     placeholder="Re-enter password"
                   />
+                  <button
+                    type="button"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  >
+                    {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                  </button>
                 </div>
               </div>
 
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-teal-600 text-white py-3 rounded-lg hover:bg-teal-700 disabled:opacity-50 flex items-center justify-center font-medium transition-colors"
+                className="w-full bg-[#40A4DE] text-white py-3 rounded-lg hover:bg-[#3090C7] disabled:opacity-50 flex items-center justify-center font-medium transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
               >
                 {loading ? 'Creating Account...' : (
                   <>
@@ -273,7 +309,7 @@ export default function RegisterPage() {
               <button
                 type="button"
                 onClick={() => setStep(1)}
-                className="w-full text-gray-600 py-2 hover:text-gray-800 text-sm"
+                className="w-full text-gray-600 py-2 hover:text-gray-800 text-sm transition-colors"
               >
                 ← Back to step 1
               </button>
