@@ -48,13 +48,9 @@ async function fetchLatestAgencies() {
 }
 
 async function fetchReligiousHighlights() {
-  const [tours, categories] = await Promise.all([
-    fetchJson('/tour-packages?tourTheme=religious&status=active&limit=3&page=1').catch(() => ({ data: [] })),
-    fetchJson('/destination-categories?page=1&limit=6&status=active&travelTheme=religious').catch(() => ({ data: [] }))
-  ]);
+  const tours = await fetchJson('/tour-packages?tourTheme=religious&status=active&limit=3&page=1').catch(() => ({ data: [] }));
   return {
-    tours: tours?.data || [],
-    categories: categories?.data || []
+    tours: tours?.data || []
   };
 }
 
@@ -259,15 +255,7 @@ export default async function Home() {
             })}
           </div>
 
-          {religiousHighlights.categories.length > 0 && (
-            <div className="flex flex-wrap gap-3 justify-center">
-              {religiousHighlights.categories.map((cat) => (
-                <span key={cat._id} className="px-6 py-3 rounded-full bg-white border border-gray-200 text-sm font-semibold text-gray-600 hover:bg-orange-50 hover:text-orange-700 hover:border-orange-200 transition-all cursor-default shadow-sm">
-                  {cat.categoryName}
-                </span>
-              ))}
-            </div>
-          )}
+
 
           <div className="text-center">
             <Link

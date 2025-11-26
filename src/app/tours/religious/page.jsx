@@ -27,9 +27,8 @@ async function fetchReligiousData(searchParams) {
   params.set('limit', searchParams?.limit || '12');
   params.set('page', searchParams?.page || '1');
 
-  const [tours, categories, agencies, allAgencies, allRegions, allCategories] = await Promise.all([
+  const [tours, agencies, allAgencies, allRegions, allCategories] = await Promise.all([
     fetchJson(`/tour-packages?${params.toString()}`),
-    fetchJson('/destination-categories?page=1&limit=12&status=active&travelTheme=religious').catch(() => ({ data: [] })),
     fetchJson('/agencies?page=1&limit=12&status=active&tourType=religious').catch(() => ({ data: [] })),
     // Fetch all metadata for filters
     fetchJson('/agencies?page=1&limit=200').catch(() => ({ data: [] })),
@@ -39,7 +38,6 @@ async function fetchReligiousData(searchParams) {
 
   return {
     tours: tours || { data: [], pagination: { page: 1, totalPages: 1 } },
-    categories: categories?.data || [],
     agencies: agencies?.data || [],
     meta: {
       agencies: allAgencies?.data || [],
@@ -56,7 +54,7 @@ export const metadata = {
 
 export default async function ReligiousToursPage({ searchParams }) {
   const resolvedParams = await searchParams;
-  const { tours, categories, agencies, meta } = await fetchReligiousData(resolvedParams);
+  const { tours, agencies, meta } = await fetchReligiousData(resolvedParams);
 
   return (
     <div className="bg-gray-50 min-h-screen font-sans">
@@ -95,44 +93,7 @@ export default async function ReligiousToursPage({ searchParams }) {
           <ToursGrid items={tours.data || []} pagination={tours.pagination} />
         </div>
 
-        {/* Top Destinations */}
-        {categories.length > 0 && (
-          <div className="space-y-8">
-            <div className="text-center max-w-3xl mx-auto">
-              <h2 className="text-3xl font-bold text-gray-900 font-serif mb-4">Sacred Destinations</h2>
-              <p className="text-gray-600">Discover the holiest places across the subcontinent</p>
-            </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {categories.map((category) => (
-                <div key={category._id} className="group relative bg-white rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-orange-100 overflow-hidden">
-                  <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                    <MapPin size={48} className="text-orange-500" />
-                  </div>
-
-                  <div className="relative z-10">
-                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-orange-50 text-orange-700 text-xs font-semibold mb-4">
-                      <MapPin size={12} />
-                      {category.parentRegion?.name}
-                    </div>
-
-                    <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-orange-600 transition-colors font-serif">
-                      {category.categoryName}
-                    </h3>
-
-                    <p className="text-gray-600 text-sm leading-relaxed line-clamp-3 mb-4">
-                      {category.description}
-                    </p>
-
-                    <div className="flex items-center text-orange-600 text-sm font-medium group-hover:gap-2 transition-all">
-                      Explore Tours <ArrowRight size={16} className="ml-1" />
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
 
         {/* Trusted Agencies */}
         {agencies.length > 0 && (
